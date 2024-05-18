@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recommended Articles</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-5">
+    <h2>Recommended Articles</h2>
+    {{user.interest}}
+    <h3>Based on FastText Vector</h3>
+    <div class="row">
+        {% for article in top_fasttext_articles %}
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">{{ article.paper_id }}</h5>
+                    <p class="card-text">{{ article.document|truncatewords:20 }}</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    
+    <h3>Based on SciBERT Vector</h3>
+    <div class="row">
+        {% for article in top_scibert_articles %}
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">{{ article.paper_id }}</h5>
+                    <p class="card-text">{{ article.document }}</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>
