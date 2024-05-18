@@ -44,7 +44,6 @@ def recommended_articles(request):
                 fasttext_user_vector = fasttext_user_vector[:, :fasttext_vector.shape[1]]
                 fasttext_sim = cosine_similarity(fasttext_user_vector, fasttext_vector)[0][0]
                 fasttext_similarities.append((article, fasttext_sim))
-                print(f"FastText Dimension mismatch: User vector dim {fasttext_user_vector.shape[1]}, Article vector dim {fasttext_vector.shape[1]}")
 
         if article.scibert_vector and scibert_user_vector is not None:
             scibert_vector = np.array(article.scibert_vector).reshape(1, -1)
@@ -56,7 +55,6 @@ def recommended_articles(request):
                 scibert_user_vector = scibert_user_vector[:, :scibert_vector.shape[1]]
                 scibert_sim = cosine_similarity(scibert_user_vector, scibert_vector)[0][0]
                 scibert_similarities.append((article, scibert_sim))
-                print(f"SciBERT Dimension mismatch: User vector dim {scibert_user_vector.shape[1]}, Article vector dim {scibert_vector.shape[1]}")
 
     fasttext_similarities.sort(key=lambda x: x[1], reverse=True)
     scibert_similarities.sort(key=lambda x: x[1], reverse=True)
